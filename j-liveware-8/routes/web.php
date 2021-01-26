@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,8 +12,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/**
+ * Page controller se activa cuando vayamos a la raiz, y ademas desencadena el metodo home  
+ */
+Route::get('/', [PageController::class,'home'])->name('home');
+Route::get('curso', [PageController::class,'course'])->name('course');
 
-Route::view('/', 'index')->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
