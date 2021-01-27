@@ -6,14 +6,15 @@
                 <li class="font-medium text-sm text-gray-400 uppercase mb-4">
                     Contenido
                 </li>
-                @foreach ($course->posts as $post)<li class="flex items-center text-gray-600 mt-2">
-                    {{ $post->name }}
-                    @if($post->free)
-                    <span class="text-xs text-gray-500 font-semibold bg-gray-300 px-2 rounded-full ml-auto">
-                          Gratis
-                    </span>
-                    @endif
-                </li>
+                @foreach ($course->posts as $post)
+                    <li class="flex items-center text-gray-600 mt-2">
+                        {{ $post->name }}
+                        @if ($post->free)
+                            <span class="text-xs text-gray-500 font-semibold bg-gray-300 px-2 rounded-full ml-auto">
+                                Gratis
+                            </span>
+                        @endif
+                    </li>
                 @endforeach
             </ul>
         </div>
@@ -22,11 +23,24 @@
             <h2 class="text-4xl">{{ $course->name }}</h2>
             <p>{{ $course->description }}</p>
             <div class="flex mt-3">
-                <img src="{{ $course->user->avatar }}"  class="h-10 w-10 rounded-full mr-2" alt="">
+                <img src="{{ $course->user->avatar }}" class="h-10 w-10 rounded-full mr-2" alt="">
                 <div>
-                    <p  class="text-gray-500 text-sm">{{$course->user->name}}</p>
-                    <p  class="text-gray-300 text-xs">{{$course->created_at->diffForHumans()}}</p>
+                    <p class="text-gray-500 text-sm">{{ $course->user->name }}</p>
+                    <p class="text-gray-300 text-xs">{{ $course->created_at->diffForHumans() }}</p>
                 </div>
+            </div>
+            Cursos Similares
+            <div class="grid grid-cols-2 gap-4 my-8">
+                @foreach ($course->similar() as $course)
+                    <div class="bg-white shadow-lg rounded-lg px-4 py-6 text-center">
+                        <a href="{{ route('course', $course->slug) }}">
+                            <img src="{{ $course->image }}" class="rounded-md mb-2" alt="">
+                            <h2 class="text-lg text-gray-600 truncate uppercase">{{ $course->name }}</h2>
+                            <h3 class="text-md text-gray-500">{{ $course->excerpt }}</h3>
+                            <img src="{{ $course->user->avatar }}" alt="" class="rounded-full mt-4 mx-auto h-16 w-16">
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
