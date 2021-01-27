@@ -10,3 +10,5 @@
 De esta manera enviamos parametros a los componentes , de esta manera el componente livewire emplea el componente blade [example](resources\views\livewire\course-list.blade.php)
 
  `php artisan make:component course-card` este comando generara un nuevo compnente el cual va a estar almacenado en una nueva carpeta llamada components, 
+ ## Modificacion de componestes de Jetstream
+ `php artisan vendor:publish` con este comando podemos acceder a los componentes de jetstream para su modificacion, debemos escoger el archivo a modificar , en este caso es el #25(jetstream-views) por lo que se creara una nueva carpeta vendor 
